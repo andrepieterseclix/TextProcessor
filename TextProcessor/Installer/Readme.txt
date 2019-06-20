@@ -1,0 +1,1 @@
+﻿The installer is built using WIX from the post build commands.

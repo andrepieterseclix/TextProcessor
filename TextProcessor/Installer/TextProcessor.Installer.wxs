@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" UpgradeCode="BB499AB3-EC2D-4EB2-B182-714A09354919" Version="$(var.AssemblyVersion)" Language="1033" Name="TextProcessor" Manufacturer="VitalSoft">
+    <Package InstallerVersion="300" Compressed="yes" />
+    <Media Id="1" Cabinet="TextProcessor.cab" EmbedCab="yes" />
+    <Icon Id="AddRemoveIcon.ico" SourceFile="Installer\AddRemoveIcon.ico" />
+
+    <!-- Set Properties-->
+    <Property Id="ARPPRODUCTICON" Value="AddRemoveIcon.ico" />
+    <Property Id="WixShellExecTarget" Value="[#TextProcessor.exe]" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch TextProcessor" />
+
+    <!-- Define the directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="TextProcessor">
+          <Directory Id="PLUGINSDIRECTORY" Name="Plugins" />
+          <Directory Id="HELPDIRECTORY" Name="Help">
+            <Directory Id="HELPRESOURCESDIRECTORY" Name="resources" />
+          </Directory>
+        </Directory>
+      </Directory>
+      <!-- Start Menu Shortcuts -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuSubfolder" Name="TextProcessor">
+          <Component Id="StartMenuShortcut" Guid="13974900-3617-4F96-85FC-12460A5AE0A1">
+            <Shortcut Id="ApplicationShortcut" Name="TextProcessor" Description="Text Processor" Target="[APPLICATIONROOTDIRECTORY]TextProcessor.exe" WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+            <RegistryValue Root="HKCU" Key="Software\VitalSoft\TextProcessor" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- Add files to your installer package -->
+    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+      <Component Id="Framework.Wpf.dll" Guid="BCE143A6-F53C-45B1-8D49-A99C59B3D4B7">
+        <File Id="Framework.Wpf.dll" Source="Framework.Wpf.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="MahApps.Metro.dll" Guid="6DAFCFB4-54F6-4C0F-8AF8-124E985A7141">
+        <File Id="MahApps.Metro.dll" Source="MahApps.Metro.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="System.Windows.Interactivity.dll" Guid="EF6EC8B5-CDD0-4B73-8616-62BBFDDC7662">
+        <File Id="System.Windows.Interactivity.dll" Source="System.Windows.Interactivity.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="TextProcessor.exe" Guid="2CEA6C33-1747-4A01-94CD-965FD9AE2A2A">
+        <File Id="TextProcessor.exe" Source="TextProcessor.exe" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="TextProcessor.Infrastructure.dll" Guid="17216775-64BC-402E-8126-F4711C5BEE56">
+        <File Id="TextProcessor.Infrastructure.dll" Source="TextProcessor.Infrastructure.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="PLUGINSDIRECTORY">
+      <Component Id="TextProcessor.ClipboardStream.dll" Guid="9D4513CE-454D-4418-9A69-FE671722500D">
+        <File Id="TextProcessor.ClipboardStream.dll" Source="Plugins\TextProcessor.ClipboardStream.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="TextProcessor.Processors.dll" Guid="4AC18DC0-5CD4-496F-8F08-76C33B456D23">
+        <File Id="TextProcessor.Processors.dll" Source="Plugins\TextProcessor.Processors.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="TextProcessor.TestStream.dll" Guid="5ED5983C-CF49-4528-B4C7-4F386EEE50E6">
+        <File Id="TextProcessor.TestStream.dll" Source="Plugins\TextProcessor.TestStream.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="HELPDIRECTORY">
+      <Component Id="index.html" Guid="E4EC2940-837F-4441-A3E2-5EEA1C8FCCAA">
+        <File Id="index.html" Source="Help\index.html" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="HELPRESOURCESDIRECTORY">
+      <Component Id="Layout.png" Guid="A3D6139E-650E-4D25-86D2-43A88D564958">
+        <File Id="Layout.png" Source="Help/resources/Layout.png" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- UI -->
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+
+    <!-- Custom Actions -->
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+    <!-- Tell WiX to install the files -->
+    <Feature Id="MainApplication" Title="Main Application" Level="1">
+      <!-- Files -->
+      <ComponentRef Id="Framework.Wpf.dll" />
+      <ComponentRef Id="MahApps.Metro.dll" />
+      <ComponentRef Id="System.Windows.Interactivity.dll" />
+      <ComponentRef Id="TextProcessor.exe" />
+      <ComponentRef Id="TextProcessor.Infrastructure.dll" />
+      <ComponentRef Id="TextProcessor.ClipboardStream.dll" />
+      <ComponentRef Id="TextProcessor.Processors.dll" />
+      <ComponentRef Id="TextProcessor.TestStream.dll" />
+      <ComponentRef Id="index.html" />
+      <ComponentRef Id="Layout.png" />
+      <!-- Start Menu Shortcut-->
+      <ComponentRef Id="StartMenuShortcut" />
+    </Feature>
+
+  </Product>
+</Wix>

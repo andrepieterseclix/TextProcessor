@@ -1,0 +1,6 @@
+﻿<Window x:Class="TextProcessor.Views.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Help" Height="700" Width="1000" WindowStartupLocation="CenterScreen" Icon="/TextProcessor;component/1410734594_27862.ico">
+    <WebBrowser x:Name="browser"/>
+</Window>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Help</title>
+		<meta name="description" content="Text Processor Help Document">
+		<meta name="author" content="Andre">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<style type="text/css">
+			body {
+				background: WhiteSmoke;
+				font-family: Courier;
+				padding: 5px 10px;
+			}		
+		
+			h1 {
+				font-size: 20px;
+				color: DarkRed;
+			}
+			
+			h2 {
+				font-size: 16px;
+				color: #2F4F4F;
+			}
+			
+			h3 {
+				font-size: 14px;
+				color: Red;
+			}
+			
+			li {
+				font-size: 12px;
+				padding: 2px;
+			}
+			
+			p {
+				font-size: 12px;
+				color: #4F4F4F;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>Text Processor Help</h1>
+			</header>
+			
+			<nav>
+				<h2>Contents</h2>
+				<ul>
+					<li><a href="#introSection">Introduction</a></li>
+					<li><a href="#layoutSection">Application Layout</a></li>
+				</ul>
+			</nav>
+			
+			<div>
+				<h2 id="introSection">Introduction</h2>
+				<p>Text Processor is a tool for manipulating text items in a systematic way.  Text items are streamed to the application with the selected stream plug-in, for example, the Clipboard stream plug-in.  These text items are then stinged together using one of the text processor plug-ins.  The output will then be displayed where you can copy and use it.</p>		
+			</div>
+			
+			<div>
+				<h2 id="layoutSection">Application Layout</h2>
+				<p>The functionality of the application is split into three columns.  The left-hand side is where you will see all the streamed text items, and where you control the selected stream.  On the right-hand side, you control how the text items are concatenated together to form the output, which will be visible in the centre column.</p>
+				<img src="resources/Layout.png"/>
+				<ol>
+					<li><strong>Input Stream Status</strong> - indicates the current status of the selected stream.</li>
+					<li><strong>Start and Stop</strong> - start streaming or stop streaming from the selected stream.</li>
+					<li><strong>Selected Stream</strong> - the drop down menu for selecting the stream that will be active.</li>
+					<li><strong>Ordering Method</strong> - specifies how the streamed text items should be ordered.</li>
+					<li><strong>Streamed Text Items</strong> - a list of streamed text items.</li>
+					<li><strong>Check/Uncheck All</strong> - shortcut buttons for checking or unchecking all the text items.</li>
+					<li><strong>Text Item Manipulation</strong> - commands for manipulating the text items in the list.</li>
+					<li><strong>Log</strong> - output console for inspecting application events.</li>
+					<li><strong>Output</strong> - the output produced by processing the text items.</li>
+					<li><strong>Copy Output</strong> - copies the output text to the clipboard.</li>
+					<li><strong>Tool Bar</strong> - application-level commands.</li>
+					<li><strong>Selected Text Processor</strong> - the drop down menu for selecting a text processor.</li>
+					<li><strong>Text Processor Options</strong> - the available options for the selected text processor.</li>
+				</ol>
+				
+				<h3>Input Text Stream</h3>
+				<p>The word "stream" refers to the source of the text items that will be processed.  Streams are implemented throug plug-ins.  All the available stream plugins will be visible in the drop-down menu.</p>
+			</div>
+
+			<footer>
+				<p>
+					&copy; Copyright
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

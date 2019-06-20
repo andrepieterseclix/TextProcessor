@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="TextProcessor.Processors.Views.BaseSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             MinWidth="200">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Resources/Dictionary.xaml"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding FirstColumnWidth, FallbackValue=110}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Style="{StaticResource SettingLabelStyle}" Text="Separator:"/>
+        <TextBox Grid.Row="0" Style="{StaticResource SettingStyle}" Text="{Binding BaseSettings.Separator, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="1" Style="{StaticResource SettingLabelStyle}" Text="Orientation:"/>
+        <ComboBox Grid.Row="1" Style="{StaticResource SettingStyle}" ItemsSource="{Binding BaseSettings.Orientations}" SelectedItem="{Binding BaseSettings.SelectedOrientation, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="2" Style="{StaticResource SettingLabelStyle}" Text="Surround With:"/>
+        <ComboBox Grid.Row="2" Style="{StaticResource SettingStyle}" ItemsSource="{Binding BaseSettings.EnclosingCharacters}" SelectedItem="{Binding BaseSettings.SelectedEnclosingCharacters, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Description"/>
+        <Grid Grid.Row="3" Style="{StaticResource SettingStyle}" IsEnabled="{Binding BaseSettings.EnableCustomEnclosingCharacters}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding BaseSettings.CustomFrontEnclosingString, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Column="1" Text="and" Margin="5, 0"/>
+            <TextBox Grid.Column="2" Text="{Binding BaseSettings.CustomBackEnclosingString, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+    </Grid>
+</UserControl>

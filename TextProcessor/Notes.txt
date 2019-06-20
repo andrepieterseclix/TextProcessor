@@ -1,0 +1,27 @@
+﻿Install-Package MahApps.Metro.Resources
+Install-Package Expression.Blend.Sdk
+
+explain that for plugins, set the solution that the main project depends on the plugins because they are copied to the main project's output folder, and should be built first (to create dirs if required)
+Plugin Directory:
+	Debug of assemblies copied to the dir did not attach debugger initially.  Tried to copy .pdb file to Plugin dir, did not work.  Output console reported the .pdb for the file in Plugin did could not be found, and was looking in the TextProcessor's output folder (root of Plugins).  Copied it there, and it worked.  Curious, when i deleted the pdb file, it still worked (linked to the debugger).  Thought it was the vsprocess, so closed vs, deleted the entire output, restarted, and it still worked!
+	Linked assemblies of files in Plugin dir are loaded successfully because it is already loaded into the AppDomain (do some research and verify)!
+
+Can put multiple MEF parts in one assembly, or split into one per assembly.  In this case the Processors are put into one, and the Streams are split.
+
+Initiallize ImportsMany for InputStreams and TextProcessors in PluginService were arrays, but changed to lists to allow removing them when they fail to initialize.
+On field imports, set it equal to null otherwise it gives a warning that it is never set.
+
+Candidate Processors
+	Base - separator, surround with (left and right), direction/orientation
+	File Processor - allow to extract the file name only
+	Regex - match, or replace
+
+It is the responsibility of the textprocessor plugin to call OutputService.Refresh when it needs to refresh, for example, on changing a property on a view model.
+
+In this application there is no mediator for loosely coupled messaging, using shared services instead.
+
+When making changes to projects that copies the output to the main app, remember to build the whole solution before running the debugger, VS will check only if the startup project and static references to it are built and up to date.
+
+BaseProcessor - use inheritance to prevent repetitive code, and to use template pattern.
+
+My Framework vs Prism - Prism is more general, this framework is targeted for a more specific Plug-in architecture.
